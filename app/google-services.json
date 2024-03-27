@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "554669986698",
+    "project_id": "foodcatering-64ef2",
+    "storage_bucket": "foodcatering-64ef2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554669986698:android:6d987a2d98f9c278bb2e73",
+        "android_client_info": {
+          "package_name": "com.example.foodcatering"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAkeYmdvwH_LGCTkqLUrqj7tMtan_b9oU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554669986698:android:bf0ecf00b84214cabb2e73",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAkeYmdvwH_LGCTkqLUrqj7tMtan_b9oU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

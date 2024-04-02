@@ -78,12 +78,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void checkUser() {
-        String userEmail = loginEmail.getText().toString().trim();
+        String userEmail = loginEmail.getText().toString().trim().replace(".", ",");
         String userPassword = loginPassword.getText().toString().trim();
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         Query checkEmailDatabase = reference.orderByChild("email").equalTo(userEmail);
-
         checkEmailDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -97,12 +96,10 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
                     } else{
                         loginPassword.setError("Wrong Password");
-                        Toast.makeText(LoginActivity.this, "Wrong Password", Toast.LENGTH_SHORT).show();
                         loginPassword.requestFocus();
                     }
                 } else {
-                    loginEmail.setError("No such User exist");
-                    Toast.makeText(LoginActivity.this, "User doesnt exist", Toast.LENGTH_SHORT).show();
+                    loginEmail.setError("No such user exist");
                     loginEmail.requestFocus();
                 }
             }

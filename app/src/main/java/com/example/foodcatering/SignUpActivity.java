@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,18 +44,39 @@ public class SignUpActivity extends AppCompatActivity {
                 reference = database.getReference("users");
 
                 String name = signupUsername.getText().toString();
-                String email = signupEmail.getText().toString();
+                String email = signupEmail.getText().toString().replace(".", ",");
                 String password = signupPassword.getText().toString();
                 String confirmPassword = signupconfirmPassword.getText().toString();
 
-                HelperClass helperClass = new HelperClass(name, email, password);
-                reference.child(email).setValue(helperClass);
+                if (!(name.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty())) {
+                    if (email.contains("@")) {
+                        if (password.length() >= 6) {
+                            if (password.equals(confirmPassword)) {
+                                signupconfirmPassword.setError("Password does not match");
+                                HelperClass helperClass = new HelperClass(name, email, password);
+                                reference.child(email).setValue(helperClass);
 
-                Toast.makeText(SignUpActivity.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
-                startActivity(intent);
+                                Toast.makeText(SignUpActivity.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                            } else {
+                                signupconfirmPassword.setError("Password does not match");
+                            }
+                    } else {
+                        signupPassword.setError("Password must be at least 6 characters");
+                    }
+                } else {
+                    signupEmail.setError("Invalid email address");
+                }
+            } else {
+                    signupUsername.setError("Field cannot be empty");
+                    signupEmail.setError("Field cannot be empty");
+                    signupPassword.setError("Field cannot be empty");
+                    signupconfirmPassword.setError("Field cannot be empty");
+                }
             }
         });
+
 
         loginRedirectText.setOnClickListener(new View.OnClickListener() {
             @Override

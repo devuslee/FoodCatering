@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "554669986698",
+    "firebase_url": "https://foodcatering-64ef2-default-rtdb.firebaseio.com",
+    "project_id": "foodcatering-64ef2",
+    "storage_bucket": "foodcatering-64ef2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:554669986698:android:760733e156a350c9bb2e73",
+        "android_client_info": {
+          "package_name": "com.example.foodcatering"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAkeYmdvwH_LGCTkqLUrqj7tMtan_b9oU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

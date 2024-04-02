@@ -42,6 +42,7 @@
                 android:layout_marginTop="40dp"
                 android:padding="8dp"
                 android:hint="Name"
+                android:textColorHint="@color/grey"
                 android:drawableLeft="@drawable/baseline_person_2_24"
                 android:drawablePadding="8dp">
             </EditText>
@@ -54,35 +55,60 @@
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
                 android:hint="Email"
+                android:textColorHint="@color/grey"
                 android:drawableLeft="@drawable/baseline_email_24"
                 android:drawablePadding="8dp">
             </EditText>
 
-            <EditText
-                android:id="@+id/signuppassword"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordTextInputLayout"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/borders"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:padding="8dp"
                 android:hint="Password"
-                android:drawableLeft="@drawable/baseline_lock_person_24"
-                android:drawablePadding="8dp"
-                android:inputType="textPassword">
-            </EditText>
+                app:hintTextColor="@color/hint"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleDrawable="@drawable/hidepassword2">
 
-            <EditText
-                android:id="@+id/signupconfirmpassword"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signuppassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/borders"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:drawableStart="@drawable/baseline_lock_person_24"
+                    android:drawablePadding="8dp"
+                    android:inputType="textPassword"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordTextInputLayout2"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/borders"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:padding="8dp"
-                android:hint="Confirm password"
-                android:drawableLeft="@drawable/baseline_lock_person_24"
-                android:drawablePadding="8dp"
-                android:inputType="textPassword">
-            </EditText>
+                android:hint="Confirm Password"
+                app:hintTextColor="@color/hint"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleDrawable="@drawable/showpassword">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/signupconfirmpassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/borders"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:drawableStart="@drawable/baseline_lock_person_24"
+                    android:drawablePadding="8dp"
+                    android:inputType="textPassword"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/signupbutton"

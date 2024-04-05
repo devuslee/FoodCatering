@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,6 +26,8 @@ public class LoginActivity extends AppCompatActivity {
     Button loginButton;
     TextView signupRedirectText;
 
+    FirebaseAuth fAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,8 @@ public class LoginActivity extends AppCompatActivity {
         loginPassword = findViewById(R.id.loginpassword);
         loginButton = findViewById(R.id.loginbutton);
         signupRedirectText = findViewById(R.id.signuplink);
+
+        fAuth = FirebaseAuth.getInstance();
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,34 +85,49 @@ public class LoginActivity extends AppCompatActivity {
 
     public void checkUser() {
         String userEmail = loginEmail.getText().toString().trim().replace(".", ",");
+        String firebaseEmail = loginEmail.getText().toString().trim();
         String userPassword = loginPassword.getText().toString().trim();
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         Query checkEmailDatabase = reference.orderByChild("email").equalTo(userEmail);
-        checkEmailDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    loginEmail.setError(null);
-                    String passwordFromDB = snapshot.child(userEmail).child("password").getValue(String.class);
 
-                    if (passwordFromDB.equals(userPassword)) {
-                        loginEmail.setError(null);
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                    } else{
-                        loginPassword.setError("Wrong Password");
-                        loginPassword.requestFocus();
-                    }
+        fAuth.signInWithEmailAndPassword(firebaseEmail, userPassword).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                FirebaseUser currentUser = fAuth.getCurrentUser();
+                if (currentUser != null && currentUser.isEmailVerified()) {
+                    checkEmailDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()){
+                                loginEmail.setError(null);
+                                String passwordFromDB = snapshot.child(userEmail).child("password").getValue(String.class);
+
+                                if (passwordFromDB.equals(userPassword)) {
+                                    loginEmail.setError(null);
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    Toast.makeText(LoginActivity.this, "Sign in successful!", Toast.LENGTH_SHORT).show();
+                                    startActivity(intent);
+                                } else{
+                                    loginPassword.setError("Wrong Password");
+                                    loginPassword.requestFocus();
+                                }
+                            } else {
+                                loginEmail.setError("No such user exist");
+                                loginEmail.requestFocus();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 } else {
-                    loginEmail.setError("No such user exist");
-                    loginEmail.requestFocus();
+                    Toast.makeText(LoginActivity.this, "Please verify your email to login.", Toast.LENGTH_SHORT).show();
+                    // Send verification email or handle unverified user
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+            } else {
+                Toast.makeText(LoginActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
             }
         });
     }

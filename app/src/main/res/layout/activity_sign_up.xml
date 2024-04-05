@@ -19,46 +19,43 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_gravity="center_horizontal"
-            android:padding="24dp"
-            android:background="@drawable/borders">
-            
+            android:background="@drawable/borders"
+            android:orientation="vertical"
+            android:padding="24dp">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Sign Up"
-                android:textSize="36sp"
-                android:textStyle="bold"
                 android:textAlignment="center"
-                android:textColor="@color/lavendar">
-            </TextView>
+                android:textColor="@color/lavendar"
+                android:textSize="36sp"
+                android:textStyle="bold"></TextView>
 
             <EditText
                 android:id="@+id/signupusername"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@drawable/borders"
                 android:layout_marginTop="40dp"
-                android:padding="8dp"
-                android:hint="Name"
-                android:textColorHint="@color/grey"
+                android:background="@drawable/borders"
                 android:drawableLeft="@drawable/baseline_person_2_24"
-                android:drawablePadding="8dp">
-            </EditText>
+                android:drawablePadding="8dp"
+                android:hint="Name"
+                android:padding="8dp"
+                android:textColorHint="@color/grey"></EditText>
 
             <EditText
                 android:id="@+id/signupemail"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@drawable/borders"
                 android:layout_marginTop="20dp"
-                android:padding="8dp"
-                android:hint="Email"
-                android:textColorHint="@color/grey"
+                android:background="@drawable/borders"
                 android:drawableLeft="@drawable/baseline_email_24"
-                android:drawablePadding="8dp">
-            </EditText>
+                android:drawablePadding="8dp"
+                android:hint="Email"
+                android:padding="8dp"
+                android:textColorHint="@color/grey"></EditText>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/passwordTextInputLayout"
@@ -67,21 +64,20 @@
                 android:layout_marginTop="20dp"
                 android:hint="Password"
                 app:hintTextColor="@color/hint"
-                app:passwordToggleEnabled="true"
-                app:passwordToggleDrawable="@drawable/hidepassword2">
+                app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/signuppassword"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@drawable/borders"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
                     android:drawableStart="@drawable/baseline_lock_person_24"
                     android:drawablePadding="8dp"
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword"
+                    android:paddingStart="8dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="8dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -92,21 +88,20 @@
                 android:layout_marginTop="20dp"
                 android:hint="Confirm Password"
                 app:hintTextColor="@color/hint"
-                app:passwordToggleEnabled="true"
-                app:passwordToggleDrawable="@drawable/showpassword">
+                app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/signupconfirmpassword"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@drawable/borders"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
                     android:drawableStart="@drawable/baseline_lock_person_24"
                     android:drawablePadding="8dp"
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword"
+                    android:paddingStart="8dp"
+                    android:paddingTop="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="8dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -114,24 +109,20 @@
                 android:id="@+id/signupbutton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sign Up"
                 android:layout_marginTop="20dp"
-                android:textSize="18sp">
-            </Button>
+                android:text="Sign Up"
+                android:textSize="18sp"></Button>
 
             <TextView
                 android:id="@+id/signinlink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Already have an account? Login"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:padding="8dp">
-            </TextView>
+                android:padding="8dp"
+                android:text="Already have an account? Login"></TextView>
 
         </LinearLayout>
-    
-
 
 
     </androidx.cardview.widget.CardView>

@@ -64,7 +64,8 @@
                 android:layout_marginTop="20dp"
                 android:hint="Password"
                 app:hintTextColor="@color/hint"
-                app:passwordToggleEnabled="true">
+                app:passwordToggleEnabled="false"
+                >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/signuppassword"
@@ -88,7 +89,7 @@
                 android:layout_marginTop="20dp"
                 android:hint="Confirm Password"
                 app:hintTextColor="@color/hint"
-                app:passwordToggleEnabled="true">
+                app:passwordToggleEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/signupconfirmpassword"

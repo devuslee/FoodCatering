@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
@@ -33,13 +34,14 @@ public class SignUpActivity extends AppCompatActivity {
 
     EditText signupUsername, signupEmail, signupPassword, signupconfirmPassword;
 
-    TextInputLayout passwordTextInputLayout;
-    TextInputEditText passwordEditText;
+    TextInputLayout passwordTextInputLayout, passwordTextInputLayout2;
+    TextInputEditText passwordEditText, signupPasswordEditText;
     TextView loginRedirectText;
     Button signupButton;
     FirebaseDatabase database;
     DatabaseReference reference;
     private FirebaseAuth fAuth;
+
 
 
     @Override
@@ -54,10 +56,88 @@ public class SignUpActivity extends AppCompatActivity {
         signupButton = findViewById(R.id.signupbutton);
         loginRedirectText = findViewById(R.id.signinlink);
         passwordTextInputLayout = findViewById(R.id.passwordTextInputLayout);
+        passwordTextInputLayout2 = findViewById(R.id.passwordTextInputLayout2);
         passwordEditText = findViewById(R.id.signuppassword);
+        signupPasswordEditText = findViewById(R.id.signupconfirmpassword);
 
         fAuth = FirebaseAuth.getInstance();
 
+
+
+        passwordEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus && signupPassword.getError() != null) {
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            passwordTextInputLayout.setPasswordVisibilityToggleEnabled(true);
+                        }
+                    }, 2000);
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            signupPassword.setError(null);
+                        }
+                    }, 2000); // Delay in milliseconds (adjust as needed)
+                } else {
+
+                    passwordTextInputLayout.setPasswordVisibilityToggleEnabled(false);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            signupPassword.setError(null);
+                        }
+                    }, 2000); // Delay in milliseconds (adjust as needed)
+                }
+
+                if (hasFocus && signupPassword.getError() == null) {
+                    passwordTextInputLayout.setPasswordVisibilityToggleEnabled(true);
+
+                } else {
+                    passwordTextInputLayout.setPasswordVisibilityToggleEnabled(false);
+                }
+            }
+        });
+
+        signupPasswordEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus && signupconfirmPassword.getError() != null) {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            passwordTextInputLayout2.setPasswordVisibilityToggleEnabled(true);
+                        }
+                    }, 2000);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            signupconfirmPassword.setError(null);
+                        }
+                    }, 2000);
+
+                } else {
+
+                    passwordTextInputLayout2.setPasswordVisibilityToggleEnabled(false);
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            signupconfirmPassword.setError(null);
+                        }
+                    }, 2000); // Delay in milliseconds (adjust as needed)
+                }
+
+                if (hasFocus && signupconfirmPassword.getError() == null) {
+                    passwordTextInputLayout2.setPasswordVisibilityToggleEnabled(true);
+                } else {
+                    passwordTextInputLayout2.setPasswordVisibilityToggleEnabled(false);
+                }
+            }
+        });
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,6 +149,11 @@ public class SignUpActivity extends AppCompatActivity {
                 String firebaseemail = signupEmail.getText().toString();
                 String password = signupPassword.getText().toString();
                 String confirmPassword = signupconfirmPassword.getText().toString();
+
+                signupUsername.clearFocus();
+                signupEmail.clearFocus();
+                signupPassword.clearFocus();
+                signupconfirmPassword.clearFocus();
 
                 if (!(name.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty())) {
                     if (email.contains("@")) {
